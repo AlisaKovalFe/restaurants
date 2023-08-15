@@ -1,0 +1,29 @@
+.wrapper {
+    display:flex;
+    flex-direction: column;
+    padding: 5rem;
+}
+
+.restaurants {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.restaurant {
+    width: 30%;
+    margin-bottom: 2rem;
+
+    &__image {
+        height: 14rem;
+    }
+
+    &__description {
+        height: 6rem;
+    }
+
+    &__adress {
+        margin-top: 1rem
+    }
+}

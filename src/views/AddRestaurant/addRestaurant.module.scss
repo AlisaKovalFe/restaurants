@@ -1,0 +1,19 @@
+.wrapper {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 10rem;
+    height: 100vh;
+}
+
+.form {
+    margin-top: 3rem;
+    width: 70rem;
+
+    &__item {
+        width: 80%
+    }    
+}
+
+
+
