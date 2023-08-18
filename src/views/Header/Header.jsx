@@ -19,6 +19,10 @@ function Header(props) {
             label: <Link to='/addrest' className={styles.menu}><Title level={4}>Добавить свой ресторан</Title></Link>,
             id: '3',
         },
+        {
+            label: <Link to='/tomap' className={styles.menu}><Title level={4}>На карту</Title></Link>,
+            id: '3',
+        },
     ]
     
     return (        

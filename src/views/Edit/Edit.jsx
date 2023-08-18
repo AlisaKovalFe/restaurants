@@ -57,20 +57,21 @@ function Edit() {
                 
                 <Form 
                     form={form}
+                    name="basic"
                     onFinish={handleSubmit}
                     className={styles.form}
-                    // name="basic"
                     labelCol={{span: 8}}
                     wrapperCol={{span: 16}}
                     initialValues={{
                         remember: true,
                     }}
-                    autoComplete="off"                
+                    // autoComplete="off"                
                 >
 
                     <Form.Item
                         name="Фото"
                         label="Фото"
+                        initialValue={newImage}
                     >
                         <Input 
                             placeholder="url фото" 
@@ -82,6 +83,7 @@ function Edit() {
                     <Form.Item
                         label="Описание"
                         name="Описание"
+                        initialValue={newDescription}
                         >
                         <Input 
                             placeholder='описание'
@@ -93,6 +95,7 @@ function Edit() {
                     <Form.Item
                         label="Локация"
                         name="Локация"
+                        initialValue={newLocation}
                         >
                         <Input 
                             placeholder='локация'

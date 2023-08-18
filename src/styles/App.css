@@ -1,0 +1,46 @@
+/* ToMap */
+
+[class*="copyrights-pane"] {
+    display: none;
+}
+
+[class*="balloon-close_button"] {
+    opacity: 1;
+}
+
+.balloon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    height: 15rem;
+    padding: 0.4rem
+}
+
+.balloon__image_big {
+    width: 14rem;
+    height: 10rem;
+    margin: 1rem 0rem;
+}
+
+.hint {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 9rem;
+    height: 10rem;
+    padding: 0.4rem
+}
+
+.hint__heading {
+    font-size: 0.8rem;
+}
+
+
+.hint__image {
+    width: 8rem;
+    height: 6rem;
+    margin: 0.5rem 0rem;
+}
