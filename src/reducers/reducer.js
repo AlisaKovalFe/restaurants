@@ -1,7 +1,7 @@
 export function reducer(state, action) {
     switch(action.type) {
         case 'ADD_RESTAURANT': {
-            return [...state, action.payload]
+            return [action.payload, ...state,]
         }
 
         case 'EDIT_RESTAURANT': {

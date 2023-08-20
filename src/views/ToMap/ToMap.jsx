@@ -31,7 +31,7 @@ function ToMap(props) {
                             preset: "islands#greenDotIcon",
                         }}
                         clusters={{
-                            preset: "islands#redClusterIcons",
+                            preset: "islands#blueClusterIcons",
                         }}
                         defaultFeatures={restaurantsOnMap}
                         modules={[
@@ -44,7 +44,7 @@ function ToMap(props) {
                             data={{title: 'это ты'}}
                     />
                     <RouteButton options={{ float: "right"}}/>
-                    <SearchControl options={{ float: "right", provider: 'yandex#search', placeholderContent: 'find restaurants'}}/>
+                    <SearchControl options={{ float: "right", provider: 'yandex#search', placeholderContent: 'найти ресторан'}}/>
                 </Map>
             </YMaps>
         </section>

@@ -1,3 +1,11 @@
+const optionsOfIcon = {
+    iconLayout: "default#image",
+    iconImageHref: "https://img.icons8.com/?size=512&id=63653&format=png",
+    iconImageSize: [40, 40],
+    iconImageOffset: [-10, -10],                            
+    balloonCloseButton: true,
+}
+
 export const restaurants = [
     {
         id: 1,
@@ -8,6 +16,7 @@ export const restaurants = [
         },
         description: 'Перуанская кухня в сопровождении выдающихся вин',
         location: 'г. Москва, Пречистенская набережная 15, стр. 1',
+        
         features:
                 {
                     type: "Feature",
@@ -19,11 +28,11 @@ export const restaurants = [
                         properties: {
                             balloonContent: 
                                         `
-                                        <div class="balloon">
+                                        <div class="balloon balloon_small">
                                             <h5 class="balloon__heading">CEVICHERIA</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/CEVICHERIA_1440.jpg" alt="CEVICHERIA"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+7 (495) 999-99-99">+7 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,             
@@ -31,8 +40,8 @@ export const restaurants = [
                                         <div class="hint">
                                             <h5 class="hint__heading">CEVICHERIA</h5>
                                             <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/CEVICHERIA_1440.jpg" alt="CEVICHERIA"/>
-                                            <div class="hint__phone">
-                                                <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+7 (495) 999-99-99">+7 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,
@@ -41,14 +50,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     },
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -74,8 +76,8 @@ export const restaurants = [
                                         <div class="balloon">
                                             <h5 class="balloon__heading">CUTFISH</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/catfish_1400.jpg" alt="CUTFISH"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,             
@@ -83,8 +85,8 @@ export const restaurants = [
                                     <div class="hint">
                                         <h5 class="hint__heading">CUTFISH</h5>
                                         <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/catfish_1400.jpg" alt="CUTFISH"/>
-                                        <div class="hint__phone">
-                                            <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                        <div">
+                                            <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                         </div>
                                     </div>
                                     `,
@@ -93,14 +95,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     },
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -126,8 +121,8 @@ export const restaurants = [
                                         <div class="balloon">
                                             <h5 class="balloon__heading">GERALDINE</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/Interior_Geraldine_1440.jpg" alt="GERALDINE"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
+                                            <div>
+                                                <a class="map-link"href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,             
@@ -135,8 +130,8 @@ export const restaurants = [
                                     <div class="hint">
                                         <h5 class="hint__heading">GERALDINE</h5>
                                         <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/Interior_Geraldine_1440.jpg" alt="GERALDINE"/>
-                                        <div class="hint__phone">
-                                            <a href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
+                                        <div>
+                                            <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99</a>
                                         </div>
                                     </div>
                                     `,
@@ -145,14 +140,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     },   
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -178,8 +166,8 @@ export const restaurants = [
                                         <div class="balloon">
                                             <h5 class="balloon__heading">GRAND CRU</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/news/gc_1440.jpg" alt="GRAND CRU"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,             
@@ -187,8 +175,8 @@ export const restaurants = [
                                     <div class="hint">
                                         <h5 class="hint__heading">GRAND CRU</h5>
                                         <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/news/gc_1440.jpg" alt="GRAND CRU"/>
-                                        <div class="hint__phone">
-                                            <a href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
+                                        <div>
+                                            <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
                                         </div>
                                     </div>
                                     `,
@@ -197,14 +185,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     },  
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -230,8 +211,8 @@ export const restaurants = [
                                         <div class="balloon">
                                             <h5 class="balloon__heading">MARGARITA BISTRO</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/margarita_1440.jpg" alt="MARGARITA BISTRO"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,             
@@ -239,8 +220,8 @@ export const restaurants = [
                                     <div class="hint">
                                         <h5 class="hint__heading">MARGARITA BISTRO</h5>
                                         <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/margarita_1440.jpg" alt="MARGARITA BISTRO"/>
-                                        <div class="hint__phone">
-                                            <a href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
+                                        <div>
+                                            <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
                                         </div>
                                     </div>
                                     `,
@@ -249,14 +230,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     }, 
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -282,8 +256,8 @@ export const restaurants = [
                                         <div class="balloon">
                                             <h5 class="balloon__heading">MEGUMI</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/megumi_1.jpg" alt="MEGUMI"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,             
@@ -291,8 +265,8 @@ export const restaurants = [
                                     <div class="hint">
                                         <h5 class="hint__heading">MEGUMI</h5>
                                         <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/megumi_1.jpg" alt="MEGUMIO"/>
-                                        <div class="hint__phone">
-                                            <a href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
+                                        <div>
+                                            <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99</a>
                                         </div>
                                     </div>
                                     `,
@@ -301,14 +275,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     }, 
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -320,6 +287,7 @@ export const restaurants = [
         },
         description: 'Скандинавская кухня в минималистических интерьерах',
         location: 'г. Москва, ул. Трубецкая, 10',
+        tel: '+8 (495) 999-99-99',
         features:
                 {
                     type: "Feature",
@@ -329,13 +297,12 @@ export const restaurants = [
                         coordinates: [55.727328, 37.575792]
                     },
                     properties: {
-                        balloonContent: 
-                                        `
+                        balloonContent: `
                                         <div class="balloon">
                                             <h5 class="balloon__heading">MØS</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/MOS_1440.jpg" alt="MØS"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 999-99-99">+8 (495) 999-99-99</a>
                                             </div>
                                         </div>
                                         `,             
@@ -343,8 +310,8 @@ export const restaurants = [
                                         <div class="hint">
                                             <h5 class="hint__heading">MØS</h5>
                                             <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/MOS_1440.jpg" alt="MØS"/>
-                                            <div class="hint__phone">
-                                                <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
                                         `,
@@ -353,14 +320,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     },
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -386,8 +346,8 @@ export const restaurants = [
                                         <div class="balloon">
                                             <h5 class="balloon__heading">PATARA</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/patara_1440.jpg" alt="PATARA"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
                                         `,             
@@ -395,8 +355,8 @@ export const restaurants = [
                                         <div class="hint">
                                             <h5 class="hint__heading">PATARA</h5>
                                             <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/patara_1440.jpg" alt="PATARA"/>
-                                            <div class="hint__phone">
-                                                <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
                                         `,
@@ -405,14 +365,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     },
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
     {
@@ -438,17 +391,17 @@ export const restaurants = [
                                         <div class="balloon">
                                             <h5 class="balloon__heading">SELFIE</h5>
                                             <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/news/_selfie_1440.jpg" alt="SELFIE"/>
-                                            <div class="balloon__phone">
-                                                <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
                                         `,             
                         hintContent: `
                                         <div class="hint">
                                             <h5 class="hint__heading">SELFIE</h5>
-                                            <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/news/_selfie_1440.jpg" alt="SELFIE"/>
-                                            <div class="hint__phone">
-                                                <a href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
+                                            <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/patara_1440.jpg" alt="SELFIE"/>
+                                            <div>
+                                                <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
                                         `,
@@ -457,14 +410,7 @@ export const restaurants = [
                             "open": "9am - 9pm"
                         },    
                     },
-                    options: {
-                        // preset: 'islands#blueFoodIcon'
-                        iconLayout: "default#image",
-                        iconImageHref: "https://img.icons8.com/?size=512&id=hDZAPBoj5SPu&format=png",
-                        iconImageSize: [40, 40],//icon_imagesize
-                        iconImageOffset: [-10, -10],                            
-                        balloonCloseButton: true,
-                    },
+                    options: optionsOfIcon,
             },
     },
 

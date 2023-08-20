@@ -5,6 +5,7 @@ import Restaurants from '../Restaurants/Restaurants';
 import AddRestaurant from '../AddRestaurant/AddRestaurant';
 import Edit from '../Edit/Edit'
 import ToMap from '../ToMap/ToMap'
+import ToRestaurantMap from '../ToRestaurantMap/ToRestaurantMap'
 
 function Main(props) {
     return (
@@ -13,8 +14,9 @@ function Main(props) {
                 <Route path='/' element={<Home/>}></Route>
                 <Route path='/restaurants' element={<Restaurants/>}></Route>
                 <Route path='/addrest' element={<AddRestaurant/> }></Route>
-                <Route path='/restaurants/edit/:id' element={<Edit/> }></Route>
+                <Route path='/restaurants/restaurant-edit/:id' element={<Edit/> }></Route>
                 <Route path='/tomap' element={<ToMap/> }></Route>
+                <Route path='restaurants/restaurant-map/:id' element={<ToRestaurantMap/> }></Route>
             </Routes>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styles from './restaurants.module.scss'
 import { Typography } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom'
 import { globalContext } from '../../context/globalContext';
@@ -31,10 +31,14 @@ function Restaurants(props) {
                             className={styles.restaurant}
                             cover={<img alt={el.cover.alt} src={el.cover.src} className={styles.restaurant__image}/>}
                             actions={[
-                                <Link to={`/restaurants/edit/${el.id}`}>
+                                <Link to={`/restaurants/restaurant-edit/${el.id}`}>
                                     <EditOutlined key="edit" />
                                 </Link>,
-                                <DeleteOutlined key="delete" onClick={()=> handeleDelete(el.id)}/>
+                                <DeleteOutlined key="delete" onClick={()=> handeleDelete(el.id)}/>,
+                                <Link to={`/restaurants/restaurant-map/${el.id}`}>
+                                    <PlusCircleOutlined key="map"/>
+                                </Link>
+                                
                             ]}
                         >
                             <Meta
