@@ -18,6 +18,8 @@ function AddRestaurant(props) {
     const navigate = useNavigate()
     const [ coordinates, setCoordinates ] = useState([])
 
+    console.log(optionsOfIcon)
+
     const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
     const validateMessages = {
         required: "Введите ${name}",
@@ -37,8 +39,10 @@ function AddRestaurant(props) {
                     },
                     description: description,
                     features: {
+                        type: "Feature",
                         id: title,
                         geometry: {
+                            type: "Point",
                             coordinates: coordinates
                         },
                         properties: {
@@ -96,7 +100,8 @@ function AddRestaurant(props) {
                     >
                         <Placemark
                             modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
-                            geometry={coordinates}                        
+                            geometry={coordinates}    
+                            options={optionsOfIcon}                    
                         />
                         <GeolocationControl 
                                 options={{ float: "left" }}

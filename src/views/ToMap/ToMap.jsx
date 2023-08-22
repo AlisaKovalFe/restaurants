@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './tomap.module.scss'
+import { globalContext } from '../../context/globalContext';
 import { YMaps, Map, ObjectManager, GeolocationControl, SearchControl, RouteButton} from '@pbe/react-yandex-maps';
 import { Typography } from 'antd';
-import { restaurantsOnMap } from '../../data/restaurantsOnMap'
+import { restaurants } from '../../data/restaurantsOnMap'
 const { Title } = Typography;
 
 function ToMap(props) {
+    const { state } = useContext(globalContext)
 
+    let copy = [...state]
+    let features = []
+    copy.map((el) => features.push(el.features))
+
+    const restaurantsOnMap = {
+        "type": "FeatureCollection",
+        "features": features
+}
     console.log(restaurantsOnMap)
     return (
         <section className={styles.wrapper}>

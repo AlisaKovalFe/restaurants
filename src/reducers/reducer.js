@@ -6,12 +6,8 @@ export function reducer(state, action) {
         }
 
         case 'EDIT_RESTAURANT': {
-            const { description, id } = action.payload
-            const { balloonContent } = action.payload.features.properties.balloonContent
-            const { hintContent } = action.payload.features.properties.hintContent
-            const { coordinates } = action.payload.features.geometry.coordinates
+            const { description, id, coordinates, balloonContent, hintContent } = action.payload
             const { src } = action.payload.cover
-            console.log(action.payload)
             
             return state.map((el) => {
                 if (el.id === id) {

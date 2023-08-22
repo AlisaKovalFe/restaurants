@@ -15,7 +15,6 @@ function Edit() {
     const { id } = useParams()
     const navigate = useNavigate()
     const [form] = Form.useForm();
-    console.log(id)
 
     const currentRestaurant = state.find((el) => el.id === +id)
     let initialNewPhone = currentRestaurant.features.properties.balloonContent.replace(/[^0-9]/g,"").substr(-11, 11)
@@ -34,33 +33,27 @@ function Edit() {
                     src: newImage,
                 },
                 description: newDescription,
-                features: {
-                        id: currentRestaurant.features.id,
-                        geometry: {
-                            coordinates: newCoordinates
-                        },
-                        properties: {
-                            balloonContent: 
-                                        `
-                                        <div class="balloon balloon_small">
-                                            <h5 class="balloon__heading">${currentRestaurant.title}</h5>
-                                            <img class="balloon__image balloon__image_big" src=${newImage} alt=${currentRestaurant.title}/>
-                                            <div>
-                                                <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
-                                            </div>
-                                        </div>
-                                        `,             
-                            hintContent: `
-                                        <div class="hint">
-                                            <h5 class="hint__heading">${currentRestaurant.title}</h5>
-                                            <img class="hint__image" src=${newImage} alt=${currentRestaurant.title}/>
-                                            <div>
-                                                <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
-                                            </div>
-                                        </div>
-                                        `,  
-                    },
-                }
+                coordinates: newCoordinates,
+                balloonContent: 
+                                `
+                                <div class="balloon balloon_small">
+                                    <h5 class="balloon__heading">${currentRestaurant.title}</h5>
+                                    <img class="balloon__image balloon__image_big" src=${newImage} alt=${currentRestaurant.title}/>
+                                    <div>
+                                        <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
+                                    </div>
+                                </div>
+                                `,   
+                hintContent: 
+                            `
+                            <div class="hint">
+                                <h5 class="hint__heading">${currentRestaurant.title}</h5>
+                                <img class="hint__image" src=${newImage} alt=${currentRestaurant.title}/>
+                                <div>
+                                    <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
+                                </div>
+                            </div>
+                            `,  
             }
         })
         navigate('/restaurants')

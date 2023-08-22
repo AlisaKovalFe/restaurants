@@ -10,7 +10,6 @@ const { Meta } = Card;
 
 function Restaurants() {
     const { state, dispatch } = useContext(globalContext)
-    console.log(state)
 
     function handeleDelete(id) {
         dispatch({

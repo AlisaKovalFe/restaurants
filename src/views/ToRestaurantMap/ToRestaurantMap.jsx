@@ -11,10 +11,7 @@ const { Title, Paragraph } = Typography;
 function ToRestaurantMap() {
     const { state } = useContext(globalContext)
     const { id } = useParams()
-
     const currentRestaurant = state.find((el) => el.id === +id)
-    console.log(currentRestaurant)
-    console.log(currentRestaurant.features.geometry.coordinates)
 
     return (
         <section className={styles.wrapper}>
