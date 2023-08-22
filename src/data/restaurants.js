@@ -1,4 +1,4 @@
-const optionsOfIcon = {
+export const optionsOfIcon = {
     iconLayout: "default#image",
     iconImageHref: "https://img.icons8.com/?size=512&id=63653&format=png",
     iconImageSize: [40, 40],
@@ -20,35 +20,31 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 1,
+                    id: 'CEVICHERIA',
                     geometry: {
                         type: "Point",
                         coordinates: [55.738571, 37.605032]
                     },
-                        properties: {
-                            balloonContent: 
-                                        `
-                                        <div class="balloon balloon_small">
-                                            <h5 class="balloon__heading">CEVICHERIA</h5>
-                                            <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/CEVICHERIA_1440.jpg" alt="CEVICHERIA"/>
-                                            <div>
-                                                <a class="map-link" href="tel:+7 (495) 999-99-99">+7 (495) 999-99-99</a>
-                                            </div>
+                    properties: {
+                        balloonContent: 
+                                    `
+                                    <div class="balloon balloon_small">
+                                        <h5 class="balloon__heading">CEVICHERIA</h5>
+                                        <img class="balloon__image balloon__image_big" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/CEVICHERIA_1440.jpg" alt="CEVICHERIA"/>
+                                        <div>
+                                            <a class="map-link" href="tel:+7 (495) 999-99-99">+7 (495) 999-99-99</a>
                                         </div>
-                                        `,             
-                            hintContent: `
-                                        <div class="hint">
-                                            <h5 class="hint__heading">CEVICHERIA</h5>
-                                            <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/CEVICHERIA_1440.jpg" alt="CEVICHERIA"/>
-                                            <div>
-                                                <a class="map-link" href="tel:+7 (495) 999-99-99">+7 (495) 999-99-99</a>
-                                            </div>
+                                    </div>
+                                    `,             
+                        hintContent: `
+                                    <div class="hint">
+                                        <h5 class="hint__heading">CEVICHERIA</h5>
+                                        <img class="hint__image" src="http://www.spoonguide.ru/thumb/1440x450_5//images/restaurant/moscow/CEVICHERIA_1440.jpg" alt="CEVICHERIA"/>
+                                        <div>
+                                            <a class="map-link" href="tel:+7 (495) 999-99-99">+7 (495) 999-99-99</a>
                                         </div>
-                                        `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                    </div>
+                                    `,  
                     },
                     options: optionsOfIcon,
             },
@@ -65,7 +61,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 2,
+                    id: 'CUTFISH',
                     geometry: {
                         type: "Point",
                         coordinates: [55.748179, 37.5402451]
@@ -89,11 +85,7 @@ export const restaurants = [
                                             <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                         </div>
                                     </div>
-                                    `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                    `,   
                     },
                     options: optionsOfIcon,
             },
@@ -110,7 +102,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 3,
+                    id: 'GERALDINE',
                     geometry: {
                         type: "Point",
                         coordinates: [55.739042, 37.597199]
@@ -134,11 +126,7 @@ export const restaurants = [
                                             <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99</a>
                                         </div>
                                     </div>
-                                    `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                    `,  
                     },   
                     options: optionsOfIcon,
             },
@@ -155,7 +143,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 4,
+                    id: 'GRAND CRU',
                     geometry: {
                         type: "Point",
                         coordinates: [55.762981, 37.594980]
@@ -179,11 +167,7 @@ export const restaurants = [
                                             <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
                                         </div>
                                     </div>
-                                    `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                    `,  
                     },  
                     options: optionsOfIcon,
             },
@@ -200,7 +184,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 5,
+                    id: 'MARGARITA BISTRO',
                     geometry: {
                         type: "Point",
                         coordinates: [55.763624, 37.594288]
@@ -224,11 +208,7 @@ export const restaurants = [
                                             <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99"</a>
                                         </div>
                                     </div>
-                                    `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                    `,   
                     }, 
                     options: optionsOfIcon,
             },
@@ -245,7 +225,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 6,
+                    id: 'MEGUMI',
                     geometry: {
                         type: "Point",
                         coordinates: [55.750332, 37.583957]
@@ -269,11 +249,7 @@ export const restaurants = [
                                             <a class="map-link" href="tel:+(495) 999-99-99">+8 (495) 999-99-99</a>
                                         </div>
                                     </div>
-                                    `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                    `,   
                     }, 
                     options: optionsOfIcon,
             },
@@ -291,7 +267,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 7,
+                    id: 'MØS',
                     geometry: {
                         type: "Point",
                         coordinates: [55.727328, 37.575792]
@@ -314,11 +290,7 @@ export const restaurants = [
                                                 <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
-                                        `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                        `,   
                     },
                     options: optionsOfIcon,
             },
@@ -335,7 +307,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 8,
+                    id: 'PATARA',
                     geometry: {
                         type: "Point",
                         coordinates: [55.764237, 37.590470]
@@ -359,11 +331,7 @@ export const restaurants = [
                                                 <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
-                                        `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                        `,   
                     },
                     options: optionsOfIcon,
             },
@@ -380,7 +348,7 @@ export const restaurants = [
         features:
                 {
                     type: "Feature",
-                    id: 9,
+                    id: 'SELFIE',
                     geometry: {
                         type: "Point",
                         coordinates: [55.757830, 37.582520]
@@ -404,11 +372,7 @@ export const restaurants = [
                                                 <a class="map-link" href="tel:+8 (495) 697-70-07">+8 (495) 697-70-07</a>
                                             </div>
                                         </div>
-                                        `,
-                        data: {
-                            "organization": "restaurant",
-                            "open": "9am - 9pm"
-                        },    
+                                        `,    
                     },
                     options: optionsOfIcon,
             },

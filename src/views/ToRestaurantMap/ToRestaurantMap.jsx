@@ -13,11 +13,12 @@ function ToRestaurantMap() {
     const { id } = useParams()
 
     const currentRestaurant = state.find((el) => el.id === +id)
+    console.log(currentRestaurant)
+    console.log(currentRestaurant.features.geometry.coordinates)
 
     return (
         <section className={styles.wrapper}>
             <Title level={2}>Ресторан на карте</Title>
-
             <div className={styles.profile}>    
                 <YMaps>
                     <Map
@@ -26,14 +27,17 @@ function ToRestaurantMap() {
                         center: [55.755246, 37.617779],
                         zoom: 12,
                         controls: ["zoomControl", "fullscreenControl"],
+                        behaviors: ["drag", "dblClickZoom"]
                         }}
                         modules={["control.ZoomControl", "control.FullscreenControl"]}
+                        options={{
+                            dragCursor:  'pointer'
+                        }}                       
                     >
                         <Placemark
                             modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
-                            geometry={[55.75, 37.57]}                           
+                            geometry={currentRestaurant.features.geometry.coordinates}                           
                             options={currentRestaurant.features.options}
-
                             properties={currentRestaurant.features.properties}    
                         />
                         <GeolocationControl 

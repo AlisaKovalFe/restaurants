@@ -15,11 +15,15 @@ function Edit() {
     const { id } = useParams()
     const navigate = useNavigate()
     const [form] = Form.useForm();
+    console.log(id)
 
     const currentRestaurant = state.find((el) => el.id === +id)
+    let initialNewPhone = currentRestaurant.features.properties.balloonContent.replace(/[^0-9]/g,"").substr(-11, 11)
+
     const [ newImage, setNewImage ] = useState(currentRestaurant.cover.src)
     const [ newDescription, setNewDescription ] = useState(currentRestaurant.description)
-    const [ newLocation, setNewLocation ] = useState(currentRestaurant.location)
+    const [ newCoordinates, setNewCoordinates ] = useState(currentRestaurant.features.geometry.coordinates)
+    const [newPhone, setNewPhone] = useState(initialNewPhone)
 
     function handleSubmit() {
         dispatch({
@@ -30,7 +34,33 @@ function Edit() {
                     src: newImage,
                 },
                 description: newDescription,
-                location: newLocation
+                features: {
+                        id: currentRestaurant.features.id,
+                        geometry: {
+                            coordinates: newCoordinates
+                        },
+                        properties: {
+                            balloonContent: 
+                                        `
+                                        <div class="balloon balloon_small">
+                                            <h5 class="balloon__heading">${currentRestaurant.title}</h5>
+                                            <img class="balloon__image balloon__image_big" src=${newImage} alt=${currentRestaurant.title}/>
+                                            <div>
+                                                <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
+                                            </div>
+                                        </div>
+                                        `,             
+                            hintContent: `
+                                        <div class="hint">
+                                            <h5 class="hint__heading">${currentRestaurant.title}</h5>
+                                            <img class="hint__image" src=${newImage} alt=${currentRestaurant.title}/>
+                                            <div>
+                                                <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
+                                            </div>
+                                        </div>
+                                        `,  
+                    },
+                }
             }
         })
         navigate('/restaurants')
@@ -95,12 +125,24 @@ function Edit() {
                     <Form.Item
                         label="Локация"
                         name="Локация"
-                        initialValue={newLocation}
+                        initialValue={newCoordinates}
                         >
                         <Input 
                             placeholder='локация'
-                            onChange={(e) => setNewLocation(e.target.value)}
-                            value={newLocation}
+                            onChange={(e) => setNewCoordinates(e.target.value)}
+                            value={newCoordinates}
+                            />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Телефон"
+                        name="телефон"
+                        initialValue={newPhone}
+                        >
+                        <Input 
+                            placeholder='Телефон'
+                            onChange={(e) => setNewPhone(e.target.value)}
+                            value={newPhone}
                             />
                     </Form.Item>
 

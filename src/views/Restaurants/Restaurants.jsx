@@ -8,8 +8,9 @@ import { globalContext } from '../../context/globalContext';
 const { Title, Paragraph } = Typography;
 const { Meta } = Card;
 
-function Restaurants(props) {
+function Restaurants() {
     const { state, dispatch } = useContext(globalContext)
+    console.log(state)
 
     function handeleDelete(id) {
         dispatch({
@@ -40,6 +41,7 @@ function Restaurants(props) {
                                 </Link>
                                 
                             ]}
+                            
                         >
                             <Meta
                                 className={styles.restaurant__description}
