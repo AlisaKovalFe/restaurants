@@ -16,9 +16,9 @@ function AddRestaurant(props) {
     const [ description, setDescription ] = useState('')
     const [ phone, setPhone ] = useState('')
     const navigate = useNavigate()
-    const [ coordinates, setCoordinates ] = useState([])
+    const [ coordinates, setCoordinates ] = useState()
 
-    console.log(optionsOfIcon)
+    console.log(coordinates)
 
     const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
     const validateMessages = {

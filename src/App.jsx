@@ -14,7 +14,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initializer(initialState, 'restaurants')
 );
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(state));
+    localStorage.setItem('restaurants', JSON.stringify(state));
   }, [state]);
 
   return (
