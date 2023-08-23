@@ -6,7 +6,7 @@ export function reducer(state, action) {
         }
 
         case 'EDIT_RESTAURANT': {
-            const { description, id, coordinates, balloonContent, hintContent } = action.payload
+            const { description, location, id, coordinates, balloonContent, hintContent } = action.payload
             const { src } = action.payload.cover
             
             return state.map((el) => {
@@ -14,6 +14,7 @@ export function reducer(state, action) {
                     return {
                         ...el, 
                         description: description,
+                        location: location,
                         cover: {
                             src: src
                         },

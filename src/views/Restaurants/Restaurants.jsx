@@ -47,7 +47,7 @@ function Restaurants() {
                                 title={el.title}
                                 description={el.description}
                             />
-                            <Paragraph className={styles.restaurant__adress} disabled>{el.features.geometry.coordinates}</Paragraph>
+                            <Paragraph className={styles.restaurant__adress} disabled>{el.location}</Paragraph>
                         </Card>
                     ))
                 } 

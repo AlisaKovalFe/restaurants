@@ -3,35 +3,42 @@
     flex-direction: column;
     justify-content: center;
     padding: 5rem 10rem;
-    height: 100vh;
+}
+
+.intro {
+    display: flex;
+}
+
+.heading {
+    margin-right: 7rem;
+}
+
+.restaurant {
+    width: 12rem;
+    height: 15rem;
+    &__image {
+        height: 70%;
+        object-fit: cover;
+    }
+
+    &__description {
+        height: 20%;
+    }
+}
+
+.edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25rem;
+    width: 67rem;
+    margin-top: 3rem
 }
 
 .map {
     width: 90%;
     height: 90%;
     margin-top: 1rem
-}
-
-
-
-.profile {
-    display: flex;
-    justify-content: space-between;
-    height: 25rem;
-    width: 67rem;
-    margin-top: 3rem
-}
-
-.restaurant {
-    height: max-content;
-    &__image {
-        height: 10rem;
-        object-fit: cover;
-    }
-
-    &__description {
-        height: 7rem;
-    }
 }
 
 .form {

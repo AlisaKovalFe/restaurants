@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import styles from './addRestaurant.module.scss'
 import { Button, Form, Input } from 'antd';
 import { Typography } from 'antd';
+import HelpToolTip from '../../components/HelpToolTip/HelpToolTip'
 import { globalContext } from '../../context/globalContext';
 import { useNavigate } from 'react-router-dom'
 import { YMaps, Map, GeolocationControl, SearchControl, RouteButton, Placemark} from '@pbe/react-yandex-maps';
@@ -12,13 +13,12 @@ function AddRestaurant(props) {
     const { dispatch } = useContext(globalContext)
     const [form] = Form.useForm();
     let [ title, setTitle ] = useState('')
-    const [ image, setImage ] = useState('https://api.interior.ru/media/images/DESIGN/Modnoe%20Mesto/Russki_restaurant/cover_RUSKI_interior_5.jpg')
+    const [ image, setImage ] = useState('https://img.restoclub.ru/uploads/place/6/4/e/f/64ef5c5b99ab8cf7336980f41581a386_w958_h835--big.jpg')
     const [ description, setDescription ] = useState('')
+    const [ location, setLocation ] = useState('')
     const [ phone, setPhone ] = useState('')
-    const navigate = useNavigate()
     const [ coordinates, setCoordinates ] = useState()
-
-    console.log(coordinates)
+    const navigate = useNavigate()
 
     const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
     const validateMessages = {
@@ -27,7 +27,7 @@ function AddRestaurant(props) {
     const regExpForPhone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
 
     function handleSubmit() {
-        if (regExp.test(title.trim()) && regExp.test(description.trim()) && regExpForPhone.test(phone.trim())) {
+        if (regExp.test(title.trim()) && regExp.test(description.trim()) && regExp.test(location.trim()) && regExpForPhone.test(phone.trim())) {
             dispatch({
                 type: 'ADD_RESTAURANT',
                 payload: {
@@ -38,6 +38,7 @@ function AddRestaurant(props) {
                         alt: title,
                     },
                     description: description,
+                    location: location,
                     features: {
                         type: "Feature",
                         id: title,
@@ -76,7 +77,10 @@ function AddRestaurant(props) {
     
     return (
         <section className={styles.wrapper}>
-            <Title level={2}>Добавь свой ресторан</Title>
+            <div className={styles.intro}>
+                <Title level={2} className={styles.heading}>Добавь свой ресторан</Title>
+                <HelpToolTip color='geekblue' title="отметь ресторан на карте"/>
+            </div>
 
             <div className={styles.data}>
                 <YMaps>
@@ -121,7 +125,7 @@ function AddRestaurant(props) {
                     initialValues={{
                         remember: true,
                     }}
-                    autoComplete="off"   
+                    autoComplete="on"   
                     validateMessages={validateMessages}             
                 >
 
@@ -188,6 +192,25 @@ function AddRestaurant(props) {
                             onChange={(e) => setDescription(e.target.value)}
                             value={description}
                         />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Локация"
+                        name="локация"
+                        hasFeedback
+                        className={styles.form__item}
+                        rules={[
+                            {
+                                required: true, 
+                                message: validateMessages.required, 
+                                pattern: location.trim() ? null : regExp 
+                            }]}
+                        >
+                        <Input 
+                            placeholder='адрес'
+                            onChange={(e) => setLocation(e.target.value)}
+                            value={location}
+                            />
                     </Form.Item>
 
                     <Form.Item
