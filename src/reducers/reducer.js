@@ -21,6 +21,7 @@ export function reducer(state, action) {
                         features: {
                             ...el.features,
                             geometry: {
+                                ...el.features.geometry,
                                 coordinates: coordinates
                             },
                             properties: {
