@@ -3,7 +3,6 @@ import styles from './tomap.module.scss'
 import { globalContext } from '../../context/globalContext';
 import { YMaps, Map, ObjectManager, GeolocationControl, SearchControl, RouteButton} from '@pbe/react-yandex-maps';
 import { Typography } from 'antd';
-import { restaurants } from '../../data/restaurantsOnMap'
 const { Title } = Typography;
 
 function ToMap(props) {
@@ -17,7 +16,6 @@ function ToMap(props) {
         "type": "FeatureCollection",
         "features": features
 }
-    console.log(restaurantsOnMap)
     return (
         <section className={styles.wrapper}>
             <Title level={2}>Рестораны на карте</Title>
