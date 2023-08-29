@@ -7,6 +7,7 @@
 
 .intro {
     display: flex;
+    align-items: center;
 }
 
 .heading {
@@ -14,8 +15,8 @@
 }
 
 .restaurant {
-    width: 12rem;
-    height: 15rem;
+    width: 15rem;
+    height: 17rem;
     &__image {
         height: 70%;
         object-fit: cover;

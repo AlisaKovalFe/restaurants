@@ -77,9 +77,9 @@ function Edit() {
     return (
         <section className={styles.wrapper}>
             <div className={styles.intro}>
-            <Title level={2} className={styles.heading}>Отредактируй профиль ресторана</Title>
+                <Title level={2} className={styles.heading}>Отредактируй профиль ресторана</Title>
 
-            <Card 
+                <Card 
                     key={currentRestaurant.id}
                     className={styles.restaurant}
                     cover={<img alt={currentRestaurant.cover.alt} src={currentRestaurant.cover.src} className={styles.restaurant__image}/>}
