@@ -5,12 +5,12 @@ import { YMaps, Map, ObjectManager, GeolocationControl, SearchControl, RouteButt
 import { Typography } from 'antd';
 const { Title } = Typography;
 
-function ToMap(props) {
+function ToMap() {
     const { state } = useContext(globalContext)
 
-    let copy = [...state]
+    // let copy = {...state}
     let features = []
-    copy.map((el) => features.push(el.features))
+    state.list.map((el) => features.push(el.features))
 
     const restaurantsOnMap = {
         "type": "FeatureCollection",

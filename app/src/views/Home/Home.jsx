@@ -4,7 +4,7 @@ import { Typography } from 'antd';
 import Gallery from '../../components/Gallery/Gallery';
 const { Title, Paragraph } = Typography;
 
-function Home(props) {
+function Home() {
     return (
         <section className={styles.wrapper}>
             <div className={styles.description}>

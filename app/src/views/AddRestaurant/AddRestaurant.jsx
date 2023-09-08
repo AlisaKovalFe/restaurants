@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import styles from './addRestaurant.module.scss'
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
+import Notification from '../../components/Notification/Notification'
+import Error from '../../components/Error/Error'
 import { Typography } from 'antd';
 import HelpToolTip from '../../components/HelpToolTip/HelpToolTip'
 import { globalContext } from '../../context/globalContext';
@@ -26,53 +28,79 @@ function AddRestaurant(props) {
     }
     const regExpForPhone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
 
-    function handleSubmit() {
-        if (regExp.test(title.trim()) && regExp.test(description.trim()) && regExp.test(location.trim()) && regExpForPhone.test(phone.trim())) {
-            dispatch({
-                type: 'ADD_RESTAURANT',
-                payload: {
-                    id: Date.now(),
-                    title: title,
-                    cover: {
-                        src: image,
-                        alt: title,
-                    },
-                    description: description,
-                    location: location,
-                    features: {
-                        type: "Feature",
-                        id: title,
-                        geometry: {
-                            type: "Point",
-                            coordinates: coordinates
-                        },
-                        properties: {
-                            balloonContent: 
-                                        `
-                                        <div class="balloon balloon_small">
-                                            <h5 class="balloon__heading">${title}</h5>
-                                            <img class="balloon__image balloon__image_big" src=${image} alt=${title}/>
-                                            <div>
-                                                <a class="map-link" href="tel:${phone}">${phone}</a>
-                                            </div>
-                                        </div>
-                                        `,             
-                            hintContent: `
-                                        <div class="hint">
-                                            <h5 class="hint__heading">${title}</h5>
-                                            <img class="hint__image" src=${image} alt=${title}/>
-                                            <div>
-                                                <a class="map-link" href="tel:${phone}">${phone}</a>
-                                            </div>
-                                        </div>
-                                        `,  
-                        },
-                        options: optionsOfIcon,
-                    }
-                }
-            })
-            navigate('/restaurants')
-        } 
+    async function handleSubmit() {
+
+        const newRestaurant = {
+            id: Date.now(),
+            title: title,
+            cover: {
+                src: image,
+                alt: title,
+            },
+            description: description,
+            location: location,
+            features: {
+                type: "Feature",
+                id: title,
+                geometry: {
+                    type: "Point",
+                    coordinates: coordinates
+                },
+                properties: {
+                    balloonContent: 
+                                `
+                                <div class="balloon balloon_small">
+                                    <h5 class="balloon__heading">${title}</h5>
+                                    <img class="balloon__image balloon__image_big" src=${image} alt=${title}/>
+                                    <div>
+                                        <a class="map-link" href="tel:${phone}">${phone}</a>
+                                    </div>
+                                </div>
+                                `,             
+                    hintContent: `
+                                <div class="hint">
+                                    <h5 class="hint__heading">${title}</h5>
+                                    <img class="hint__image" src=${image} alt=${title}/>
+                                    <div>
+                                        <a class="map-link" href="tel:${phone}">${phone}</a>
+                                    </div>
+                                </div>
+                                `,  
+                },
+                options: {
+                    iconLayout: "default#image",
+                    iconImageHref: "https://img.icons8.com/?size=512&id=63653&format=png",
+                    iconImageSize: [40, 40],
+                    iconImageOffset: [-10, -10],                            
+                    balloonCloseButton: true,
+                },
+            }
+        }
+
+        const response = await fetch('http://localhost:4000/restaurants', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(newRestaurant)
+        })
+
+        if (response.status === 200) {
+            if (regExp.test(title.trim()) && regExp.test(description.trim()) && regExp.test(location.trim()) && regExpForPhone.test(phone.trim())) {
+                dispatch({
+                    type: 'ADD_RESTAURANT',
+                    payload: newRestaurant
+                })
+                navigate('/restaurants')
+            }    
+        } else {
+            navigate('/error')
+        }
+
+
+        
+
+        
     }
     
     return (
@@ -96,10 +124,7 @@ function AddRestaurant(props) {
                         options={{
                             dragCursor:  'pointer'
                         }}
-                        onClick={(e) => {
-                            setCoordinates(e.get('coords'))
-                            console.log(e.originalEvent)
-                        }}
+                        onClick={(e) => setCoordinates(e.get('coords'))}
                         
                     >
                         <Placemark

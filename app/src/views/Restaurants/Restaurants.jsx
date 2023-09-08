@@ -25,7 +25,7 @@ function Restaurants() {
             <Title level={2}>Рестораны</Title>
             <div className={styles.restaurants}>
                 {
-                    state.map((el) => (
+                    state.list.map((el) => (
                         <Card 
                             key={el.id}
                             className={styles.restaurant}

@@ -18,7 +18,7 @@ function Edit() {
     const navigate = useNavigate()
     const [form] = Form.useForm();
 
-    const currentRestaurant = state.find((el) => el.id === +id)
+    const currentRestaurant = state.list.find((el) => el.id === +id)
     let initialNewPhone = currentRestaurant.features.properties.balloonContent.replace(/[^0-9]/g,"").substr(-11, 11)
 
     const [ newImage, setNewImage ] = useState(currentRestaurant.cover.src)
