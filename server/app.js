@@ -6,8 +6,7 @@ const http = require('http');
 const cors = require('cors')
 
 //импорты роутов
-const indexRouter = require('./routes/index');
-const cardsRouter = require('./routes/cards');
+const homeRouter = require('./routes/home');
 const restaurantsRouter = require('./routes/restaurants');
 
 const app = express();
@@ -20,8 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //urls
-app.use('/', indexRouter);
-app.use('/cards', cardsRouter);
+app.use('/', homeRouter);
 app.use('/restaurants', restaurantsRouter);
 
 // catch 404 and forward to error handler
