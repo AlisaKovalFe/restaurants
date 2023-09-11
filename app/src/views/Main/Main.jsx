@@ -9,15 +9,16 @@ import ToRestaurantMap from '../ToRestaurantMap/ToRestaurantMap'
 import Error from '../../components/Error/Error'
 
 function Main(props) {
+
     return (
         <div>
             <Routes>
                 <Route path='/' element={<Home/>}></Route>
                 <Route path='/restaurants' element={<Restaurants/>}></Route>
                 <Route path='/addrest' element={<AddRestaurant/> }></Route>
-                <Route path='/restaurants/restaurant-edit/:id' element={<Edit/> }></Route>
-                <Route path='/tomap' element={<ToMap/> }></Route>
+                <Route path='/restaurants/restaurant-edit/:id' element={<Edit/> }></Route>               
                 <Route path='restaurants/restaurant-map/:id' element={<ToRestaurantMap/> }></Route>
+                <Route path='/tomap' element={<ToMap/> }></Route>
                 <Route path='/error' element={<Error/> }></Route>
             </Routes>
         </div>

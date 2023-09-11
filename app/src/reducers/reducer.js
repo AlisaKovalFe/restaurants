@@ -42,7 +42,7 @@ export function reducer(state, action) {
 
         case 'DELETE_RESTAURANT': {
             const { id } = action.payload
-            return { ... state, list: state.list.filter((el) => el.id !== id)} 
+            return { ...state, list: state.list.filter((el) => el.id !== id)} 
         }
 
         default: {

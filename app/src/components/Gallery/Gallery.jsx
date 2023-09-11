@@ -1,8 +1,9 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import { gallery } from '../../data/gallery'
+// import { gallery } from '../../data/gallery'
 
-function Gallery(props) {
+function Gallery({ gallery }) {
+
     return (
         <div>
             <Carousel autoplay> 

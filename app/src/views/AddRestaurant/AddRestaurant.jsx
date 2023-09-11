@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
 import styles from './addRestaurant.module.scss'
 import { Button, Form, Input, notification } from 'antd';
-import Notification from '../../components/Notification/Notification'
 import Error from '../../components/Error/Error'
 import { Typography } from 'antd';
 import HelpToolTip from '../../components/HelpToolTip/HelpToolTip'
 import { globalContext } from '../../context/globalContext';
 import { useNavigate } from 'react-router-dom'
-import { YMaps, Map, GeolocationControl, SearchControl, RouteButton, Placemark} from '@pbe/react-yandex-maps';
+import { YMaps, Map, GeolocationControl, SearchControl, RouteButton, Placemark } from '@pbe/react-yandex-maps';
 import { optionsOfIcon } from '../../data/restaurants'
 const { Title } = Typography;
 
@@ -21,6 +20,10 @@ function AddRestaurant(props) {
     const [ phone, setPhone ] = useState('')
     const [ coordinates, setCoordinates ] = useState()
     const navigate = useNavigate()
+
+    const [ statusOfResponse, setStatusOfResponse] = useState(200)
+    const [ messageOfResponse, setMessageOfResponse] = useState('')
+    
 
     const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
     const validateMessages = {
@@ -87,191 +90,208 @@ function AddRestaurant(props) {
 
         if (response.status === 200) {
             if (regExp.test(title.trim()) && regExp.test(description.trim()) && regExp.test(location.trim()) && regExpForPhone.test(phone.trim())) {
+                
                 dispatch({
                     type: 'ADD_RESTAURANT',
                     payload: newRestaurant
                 })
-                navigate('/restaurants')
-            }    
-        } else {
-            navigate('/error')
+                notification.open({
+                    message: 'Отлично!',
+                    description: 'Вы успешно добавили ресторан'
+                })   
+                setTimeout(() => {
+                    navigate('/restaurants')
+                }, 3000)
+                
+            }            
+        } else if (response.status === 404) { 
+            setStatusOfResponse(404) 
+            setMessageOfResponse('Извините, данная страница не существует')        
+            // navigate('/error')
+
+        } else if (response.status === 500) {
+            setStatusOfResponse(500)    
+            setMessageOfResponse('Извините, ошибка на стороне сервера')
+            // navigate('/error')
         }
-
-
-        
-
-        
     }
     
     return (
-        <section className={styles.wrapper}>
-            <div className={styles.intro}>
-                <Title level={2} className={styles.heading}>Добавь свой ресторан</Title>
-                <HelpToolTip color='geekblue' title="отметь ресторан на карте"/>
-            </div>
+        statusOfResponse === 200 ? (
+                <section className={styles.wrapper}>
+                    <div className={styles.intro}>
+                        <Title level={2} className={styles.heading}>Добавь свой ресторан</Title>
+                        <HelpToolTip color='geekblue' title="отметь ресторан на карте"/>
+                    </div>
 
-            <div className={styles.data}>
-                <YMaps>
-                    <Map
-                        className={styles.map}
-                        defaultState={{
-                        center: [55.755246, 37.617779],
-                        zoom: 12,
-                        controls: ["zoomControl", "fullscreenControl"],
-                        behaviors: ["drag", "dblClickZoom"]
-                        }}
-                        modules={["control.ZoomControl", "control.FullscreenControl"]}
-                        options={{
-                            dragCursor:  'pointer'
-                        }}
-                        onClick={(e) => setCoordinates(e.get('coords'))}
-                        
-                    >
-                        <Placemark
-                            modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
-                            geometry={coordinates}    
-                            options={optionsOfIcon}                    
-                        />
-                        <GeolocationControl 
-                                options={{ float: "left" }}
-                                data={{title: 'это ты'}}
-                        />
-                        <RouteButton options={{ float: "right"}}/>
-                        <SearchControl options={{ float: "right", provider: 'yandex#search', placeholderContent: 'найти ресторан'}}/>
-                    </Map>
-                </YMaps>  
+                    <div className={styles.data}>
+                        <YMaps>
+                            <Map
+                                className={styles.map}
+                                defaultState={{
+                                center: [55.755246, 37.617779],
+                                zoom: 12,
+                                controls: ["zoomControl", "fullscreenControl"],
+                                behaviors: ["drag", "dblClickZoom"]
+                                }}
+                                modules={["control.ZoomControl", "control.FullscreenControl"]}
+                                options={{
+                                    dragCursor:  'pointer'
+                                }}
+                                onClick={(e) => setCoordinates(e.get('coords'))}
+                                
+                            >
+                                <Placemark
+                                    modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
+                                    geometry={coordinates}    
+                                    options={optionsOfIcon}                    
+                                />
+                                <GeolocationControl 
+                                        options={{ float: "left" }}
+                                        data={{title: 'это ты'}}
+                                />
+                                <RouteButton options={{ float: "right"}}/>
+                                <SearchControl options={{ float: "right", provider: 'yandex#search', placeholderContent: 'найти ресторан'}}/>
+                            </Map>
+                        </YMaps>  
 
-                <Form 
-                    form={form}
-                    onFinish={handleSubmit}
-                    className={styles.form}
-                    labelCol={{span: 8}}
-                    wrapperCol={{span: 16}}
-                    initialValues={{
-                        remember: true,
-                    }}
-                    autoComplete="on"   
-                    validateMessages={validateMessages}             
-                >
-
-                    <Form.Item
-                        name='название'
-                        label="Название"                   
-                        hasFeedback
-                        className={styles.form__item}
-                        rules={[
-                            { 
-                                required: true, 
-                                message: validateMessages.required,
-                                pattern: title.trim() ? null : regExp
-                            }]}
-                    
-                    >
-                        <Input 
-                            placeholder="Название" 
-                            onChange={(e) => setTitle(e.target.value)}
-                            value={title}
-                        />
-                    </Form.Item>
-                    
-                    <Form.Item
-                        name="Фото"
-                        label="Фото"
-                        className={styles.form__item}
-                        rules={[
-                            {
-                                required: false,
-                            },
-                            {
-                                type: 'url',
-                                warningOnly: true,
-                            },
-                            {
-                                type: 'string',
-                                min: 6,
-                            },
-                        ]}
-                    >
-                        <Input 
-                            placeholder="url фото" 
-                            onChange={(e) => setImage(e.target.value)}
-                            value={image}
-                            />
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Описание"
-                        name="описание"
-                        hasFeedback
-                        tooltip="Опишите свои впечатления"
-                        className={styles.form__item}
-                        rules={[
-                            { 
-                                required: true, 
-                                message: validateMessages.required,
-                                pattern: description.trim() ? null : regExp
-                            }]}
+                        <Form 
+                            form={form}
+                            onFinish={handleSubmit}
+                            className={styles.form}
+                            labelCol={{span: 8}}
+                            wrapperCol={{span: 16}}
+                            initialValues={{
+                                remember: true,
+                            }}
+                            autoComplete="on"   
+                            validateMessages={validateMessages}             
                         >
-                        <Input 
-                            placeholder='описание'
-                            onChange={(e) => setDescription(e.target.value)}
-                            value={description}
-                        />
-                    </Form.Item>
 
-                    <Form.Item
-                        label="Локация"
-                        name="локация"
-                        hasFeedback
-                        className={styles.form__item}
-                        rules={[
-                            {
-                                required: true, 
-                                message: validateMessages.required, 
-                                pattern: location.trim() ? null : regExp 
-                            }]}
-                        >
-                        <Input 
-                            placeholder='адрес'
-                            onChange={(e) => setLocation(e.target.value)}
-                            value={location}
-                            />
-                    </Form.Item>
+                            <Form.Item
+                                name='название'
+                                label="Название"                   
+                                hasFeedback
+                                className={styles.form__item}
+                                rules={[
+                                    { 
+                                        required: true, 
+                                        message: validateMessages.required,
+                                        pattern: title.trim() ? null : regExp
+                                    }]}
+                            
+                            >
+                                <Input 
+                                    placeholder="Название" 
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                />
+                            </Form.Item>
+                            
+                            <Form.Item
+                                name="Фото"
+                                label="Фото"
+                                className={styles.form__item}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                    {
+                                        type: 'url',
+                                        warningOnly: true,
+                                    },
+                                    {
+                                        type: 'string',
+                                        min: 6,
+                                    },
+                                ]}
+                            >
+                                <Input 
+                                    placeholder="url фото" 
+                                    onChange={(e) => setImage(e.target.value)}
+                                    value={image}
+                                    />
+                            </Form.Item>
 
-                    <Form.Item
-                        label="Телефон"
-                        name="телефон"
-                        hasFeedback
-                        className={styles.form__item}
-                        rules={[
-                            {
-                                required: true, 
-                                message: validateMessages.required, 
-                                pattern: phone.trim() ? null : regExpForPhone 
-                            }]}
-                        >
-                        <Input 
-                            placeholder='телефон'
-                            onChange={(e) => setPhone(e.target.value)}
-                            value={phone}
-                            />
-                    </Form.Item>
+                            <Form.Item
+                                label="Описание"
+                                name="описание"
+                                hasFeedback
+                                tooltip="Опишите свои впечатления"
+                                className={styles.form__item}
+                                rules={[
+                                    { 
+                                        required: true, 
+                                        message: validateMessages.required,
+                                        pattern: description.trim() ? null : regExp
+                                    }]}
+                                >
+                                <Input 
+                                    placeholder='описание'
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    value={description}
+                                />
+                            </Form.Item>
 
-                    <Form.Item
-                        wrapperCol={{
-                            offset: 11,
-                            span: 16,
-                        }}
-                    >
-                        <Button 
-                            type="primary" 
-                            htmlType="submit">
-                            Сохранить
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </div>    
-        </section>
+                            <Form.Item
+                                label="Локация"
+                                name="локация"
+                                hasFeedback
+                                className={styles.form__item}
+                                rules={[
+                                    {
+                                        required: true, 
+                                        message: validateMessages.required, 
+                                        pattern: location.trim() ? null : regExp 
+                                    }]}
+                                >
+                                <Input 
+                                    placeholder='адрес'
+                                    onChange={(e) => setLocation(e.target.value)}
+                                    value={location}
+                                    />
+                            </Form.Item>
+
+                            <Form.Item
+                                label="Телефон"
+                                name="телефон"
+                                hasFeedback
+                                className={styles.form__item}
+                                rules={[
+                                    {
+                                        required: true, 
+                                        message: validateMessages.required, 
+                                        pattern: phone.trim() ? null : regExpForPhone 
+                                    }]}
+                                >
+                                <Input 
+                                    placeholder='телефон'
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    value={phone}
+                                    />
+                            </Form.Item>
+
+                            <Form.Item
+                                wrapperCol={{
+                                    offset: 11,
+                                    span: 16,
+                                }}
+                            >
+                                <Button 
+                                    type="primary" 
+                                    htmlType="submit">
+                                    Сохранить
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </div>  
+                </section>
+            ) : ( statusOfResponse === 404) ? (
+                <Error statusOfResponse={statusOfResponse} messageOfResponse={messageOfResponse}/>
+            ) : ( statusOfResponse === 500 ) ? (
+                <Error statusOfResponse={statusOfResponse} messageOfResponse={messageOfResponse}/>
+            ) : ''
+        
     );
 }
 

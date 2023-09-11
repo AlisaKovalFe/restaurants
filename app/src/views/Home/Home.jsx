@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './home.module.scss'
 import { Typography } from 'antd';
 import Gallery from '../../components/Gallery/Gallery';
 const { Title, Paragraph } = Typography;
 
 function Home() {
+    const [ gallery, setGallery ] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:4000/')
+            .then((res) => res.json())
+            .then((res) => setGallery(res))
+    }, [])
+
     return (
         <section className={styles.wrapper}>
             <div className={styles.description}>
@@ -19,7 +27,7 @@ function Home() {
                 </Paragraph>   
             </div>
 
-            <div className={styles.gallery}><Gallery/></div>           
+            <div className={styles.gallery}><Gallery gallery={gallery}/></div>           
         </section>
     );
 }

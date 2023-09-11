@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styles from './restaurants.module.scss'
-import { Typography } from 'antd';
+import { useNavigate } from 'react-router-dom'
+import { Typography, notification } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom'
@@ -10,14 +11,30 @@ const { Meta } = Card;
 
 function Restaurants() {
     const { state, dispatch } = useContext(globalContext)
+    const navigate = useNavigate()
 
-    function handeleDelete(id) {
-        dispatch({
-            type: 'DELETE_RESTAURANT',
-            payload: {
-                id: id
-            }
+    async function handeleDelete(id) {
+
+        const response = await fetch(`http://localhost:4000/restaurants/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
         })
+        if (response.status === 200) {
+            dispatch({
+                type: 'DELETE_RESTAURANT',
+                payload: {
+                    id: +id
+                }
+            })
+            notification.open({
+                message: 'Отлично!',
+                description: 'Вы успешно удалили ресторан'
+            }) 
+        } else {
+            navigate('/error')
+        }
     }
 
     return (
@@ -38,7 +55,6 @@ function Restaurants() {
                                 <Link to={`/restaurants/restaurant-map/${el.id}`}>
                                     <PlusCircleOutlined key="map"/>
                                 </Link>
-                                
                             ]}
                             
                         >
