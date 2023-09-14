@@ -10,11 +10,11 @@ import { YMaps, Map, GeolocationControl, SearchControl, RouteButton, Placemark }
 import { optionsOfIcon } from '../../data/restaurants'
 const { Title } = Typography;
 
-function AddRestaurant(props) {
+function AddRestaurant() {
     const { dispatch } = useContext(globalContext)
     const [form] = Form.useForm();
-    let [ title, setTitle ] = useState('')
-    const [ image, setImage ] = useState('https://img.restoclub.ru/uploads/place/6/4/e/f/64ef5c5b99ab8cf7336980f41581a386_w958_h835--big.jpg')
+    const [ title, setTitle ] = useState('')
+    const [ image, setImage ] = useState('')
     const [ description, setDescription ] = useState('')
     const [ location, setLocation ] = useState('')
     const [ phone, setPhone ] = useState('')
@@ -23,13 +23,6 @@ function AddRestaurant(props) {
 
     const [ statusOfResponse, setStatusOfResponse] = useState(200)
     const [ messageOfResponse, setMessageOfResponse] = useState('')
-    
-
-    const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
-    const validateMessages = {
-        required: "Введите ${name}",
-    }
-    const regExpForPhone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
 
     async function handleSubmit() {
 
@@ -89,10 +82,9 @@ function AddRestaurant(props) {
         })
 
         if (response.status === 200) {
-            if (regExp.test(title.trim()) && regExp.test(description.trim()) && regExp.test(location.trim()) && regExpForPhone.test(phone.trim())) {
-                
+            if (title.trim() && image.trim() && description.trim() && location.trim() && phone.trim()) {
                 dispatch({
-                    type: 'ADD_RESTAURANT',
+                    type: 'ADD_RESTAURANT', 
                     payload: newRestaurant
                 })
                 notification.open({
@@ -102,7 +94,6 @@ function AddRestaurant(props) {
                 setTimeout(() => {
                     navigate('/restaurants')
                 }, 3000)
-                
             }            
         } else if (response.status === 404) { 
             setStatusOfResponse(404) 
@@ -113,6 +104,13 @@ function AddRestaurant(props) {
             setStatusOfResponse(500)    
             setMessageOfResponse('Извините, ошибка на стороне сервера')
             // navigate('/error')
+        } else if (response.status === 401) {
+            console.log('hi')
+            const messageResponse = await response.json()
+        console.log(messageResponse)
+            notification.open({
+                message: messageResponse.error
+            })
         }
     }
     
@@ -164,22 +162,13 @@ function AddRestaurant(props) {
                             initialValues={{
                                 remember: true,
                             }}
-                            autoComplete="on"   
-                            validateMessages={validateMessages}             
+                            autoComplete="on"            
                         >
 
                             <Form.Item
                                 name='название'
                                 label="Название"                   
-                                hasFeedback
                                 className={styles.form__item}
-                                rules={[
-                                    { 
-                                        required: true, 
-                                        message: validateMessages.required,
-                                        pattern: title.trim() ? null : regExp
-                                    }]}
-                            
                             >
                                 <Input 
                                     placeholder="Название" 
@@ -192,19 +181,6 @@ function AddRestaurant(props) {
                                 name="Фото"
                                 label="Фото"
                                 className={styles.form__item}
-                                rules={[
-                                    {
-                                        required: false,
-                                    },
-                                    {
-                                        type: 'url',
-                                        warningOnly: true,
-                                    },
-                                    {
-                                        type: 'string',
-                                        min: 6,
-                                    },
-                                ]}
                             >
                                 <Input 
                                     placeholder="url фото" 
@@ -216,15 +192,8 @@ function AddRestaurant(props) {
                             <Form.Item
                                 label="Описание"
                                 name="описание"
-                                hasFeedback
                                 tooltip="Опишите свои впечатления"
                                 className={styles.form__item}
-                                rules={[
-                                    { 
-                                        required: true, 
-                                        message: validateMessages.required,
-                                        pattern: description.trim() ? null : regExp
-                                    }]}
                                 >
                                 <Input 
                                     placeholder='описание'
@@ -236,14 +205,7 @@ function AddRestaurant(props) {
                             <Form.Item
                                 label="Локация"
                                 name="локация"
-                                hasFeedback
                                 className={styles.form__item}
-                                rules={[
-                                    {
-                                        required: true, 
-                                        message: validateMessages.required, 
-                                        pattern: location.trim() ? null : regExp 
-                                    }]}
                                 >
                                 <Input 
                                     placeholder='адрес'
@@ -255,14 +217,7 @@ function AddRestaurant(props) {
                             <Form.Item
                                 label="Телефон"
                                 name="телефон"
-                                hasFeedback
                                 className={styles.form__item}
-                                rules={[
-                                    {
-                                        required: true, 
-                                        message: validateMessages.required, 
-                                        pattern: phone.trim() ? null : regExpForPhone 
-                                    }]}
                                 >
                                 <Input 
                                     placeholder='телефон'

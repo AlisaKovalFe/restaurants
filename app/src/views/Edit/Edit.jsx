@@ -30,12 +30,6 @@ function Edit() {
     const [ statusOfResponse, setStatusOfResponse] = useState(200)
     const [ messageOfResponse, setMessageOfResponse] = useState('')
 
-    const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
-    const validateMessages = {
-        required: "Введите ${name}",
-    }
-    const regExpForPhone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
-
     async function handleSubmit() {
     
         const editedRestaurant = {
@@ -77,7 +71,7 @@ function Edit() {
         })
 
         if (response.status === 200) {
-            if (regExp.test(newDescription.trim()) && regExp.test(newLocation.trim()) && regExpForPhone.test(newPhone.trim())) {
+            if (newDescription.trim() && newLocation.trim() && newPhone.trim()) {
                 dispatch({
                     type: 'EDIT_RESTAURANT',
                     payload: editedRestaurant
@@ -92,13 +86,14 @@ function Edit() {
             }
         } else if (response.status === 404) { 
             setStatusOfResponse(404) 
-            setMessageOfResponse('Извините, данная страница не существует')        
-            // navigate('/error')
-
+            setMessageOfResponse('Извините, данная страница не существует')       
         } else if (response.status === 500) {
             setStatusOfResponse(500)    
             setMessageOfResponse('Извините, ошибка на стороне сервера')
-            // navigate('/error')
+        } else if (response.status === 401) {
+            notification.open({
+                message: 'Неполные или некорректные данные!',
+            })
         }
         
     }
@@ -171,19 +166,6 @@ function Edit() {
                             name="Фото"
                             label="Фото"
                             initialValue={newImage}
-                            rules={[
-                                {
-                                    required: false,
-                                },
-                                {
-                                    type: 'url',
-                                    warningOnly: true,
-                                },
-                                {
-                                    type: 'string',
-                                    min: 6,
-                                },
-                            ]}
                         >
                             <Input 
                                 placeholder="url фото" 
@@ -195,14 +177,7 @@ function Edit() {
                         <Form.Item
                             label="Описание"
                             name="Описание"
-                            hasFeedback
                             initialValue={newDescription}
-                            rules={[
-                                { 
-                                    required: true, 
-                                    message: validateMessages.required,
-                                    pattern: newDescription.trim() ? null : regExp
-                                }]}
                             >
                             <Input 
                                 placeholder='описание'
@@ -214,14 +189,7 @@ function Edit() {
                         <Form.Item
                             label="Локация"
                             name="локация"
-                            hasFeedback
                             initialValue={newLocation}
-                            rules={[
-                                {
-                                    required: true, 
-                                    message: validateMessages.required, 
-                                    pattern: newLocation.trim() ? null : regExp 
-                                }]}
                             >
                             <Input 
                                 placeholder='адрес'
@@ -235,12 +203,6 @@ function Edit() {
                             name="телефон"
                             hasFeedback
                             initialValue={newPhone}
-                            rules={[
-                                {
-                                    required: true, 
-                                    message: validateMessages.required, 
-                                    pattern: newPhone.trim() ? null : regExpForPhone 
-                                }]}
                             >
                             <Input 
                                 placeholder='Телефон'

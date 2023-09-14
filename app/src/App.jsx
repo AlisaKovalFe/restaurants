@@ -2,7 +2,6 @@ import './styles/App.css';
 import { useReducer, useEffect } from 'react'
 import { globalContext as GlobalContext } from './context/globalContext'
 import { reducer } from './reducers//reducer'
-import { restaurants } from './data/restaurants'
 
 import { initializer } from './hooks/useLS'
 import Header from './views/Header/Header';
@@ -26,15 +25,23 @@ function App() {
   }
 
   useEffect(() => {
-    fetch('http://localhost:4000/restaurants')
-      .then((res) => res.json())
-      .then((res) => getRestaurants(res))
+    async function resp() {
+      const response = await fetch('http://localhost:4000/restaurants')
+      const text = await response.json()
+      console.log(text)
+      getRestaurants(text)
+    }
+    resp()
+
+    // fetch('http://localhost:4000/restaurants')
+    //   .then((res) => res.json())
+    //   .then((res) => getRestaurants(res))
   }, [])
 
   useEffect(() => {
     localStorage.setItem('restaurants', JSON.stringify(state));
   }, [state]);
-
+  
   return (
     <div className="App">
       <GlobalContext.Provider value={{state, dispatch}}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Carousel } from 'antd';
-// import { gallery } from '../../data/gallery'
 
 function Gallery({ gallery }) {
 
