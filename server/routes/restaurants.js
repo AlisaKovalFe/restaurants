@@ -17,17 +17,15 @@ router.post('/', async function(req, res) {
   let strPhone
   restaurant.features.properties.balloonContent.match(/<a(.*?)>/g).map((el) => strPhone = el.replace(/[^0-9]/g,""))
 
-  let error = !regExp.test(restaurant.title) ? 'корректное название' : 
-              !regExpForSrc.test(restaurant.cover.src) ? 'корректный url фото' : 
-              !regExp.test(restaurant.description) ? 'корректное описание' : 
-              !regExp.test(restaurant.location) ? 'корректную локацию' : 
-              !regExpForPhone.test(strPhone) ? 'корректный номер телефона' : 
-              ''
+  const errors = ['корректное название', 'корректный url фото', 'корректное описание', 'корректную локацию', 'корректный номер телефона']
+  const inputs = [!regExp.test(restaurant.title), !regExpForSrc.test(restaurant.cover.src), !regExp.test(restaurant.description), !regExp.test(restaurant.location), !regExpForPhone.test(strPhone)]
+
+  const filteredErrors = errors.filter((el, i) => inputs[i]).join(', ')
 
   if (!regExp.test(restaurant.title) || !regExpForSrc.test(restaurant.cover.src) || !regExp.test(restaurant.description) || !regExp.test(restaurant.location) || !regExpForPhone.test(strPhone)) {
     res.status(401)
     let message = {
-      error: `Данные неполные или некорретные, укажите ${error}` //просто в строке не получается отправить
+      error: `Данные неполные или некорретные, укажите ${filteredErrors}` //просто в строке не получается отправить
     }
     res.send(message) // тут нет end, приметоде send, end не нужен?
 }
@@ -55,8 +53,17 @@ router.put('/restaurant-edit/:id', async function(req, res) {
   let strPhone
   restaurant.balloonContent.match(/<a(.*?)>/g).map((el) => strPhone = el.replace(/[^0-9]/g,""))
 
+  const errors = ['корректное название', 'корректный url фото', 'корректное описание', 'корректную локацию', 'корректный номер телефона']
+  const inputs = [!regExp.test(restaurant.title), !regExpForSrc.test(restaurant.cover.src), !regExp.test(restaurant.description), !regExp.test(restaurant.location), !regExpForPhone.test(strPhone)]
+
+  const filteredErrors = errors.filter((el, i) => inputs[i]).join(', ')
+
   if (!regExp.test(restaurant.title) || !regExpForSrc.test(restaurant.cover.src) || !regExp.test(restaurant.description) || !regExp.test(restaurant.location) || !regExpForPhone.test(strPhone) ) {
-    res.status(401).end()
+    res.status(401)
+    let message = {
+      error: `Данные неполные или некорретные, укажите ${filteredErrors}` 
+    }
+    res.send(message) 
   }
 
   const restaurants = await fs.readFile('./db/restaurants.txt', 'utf-8')
