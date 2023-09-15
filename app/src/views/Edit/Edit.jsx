@@ -35,28 +35,28 @@ function Edit() {
         const editedRestaurant = {
             id: +id, 
             cover: {
-                src: newImage,
+                src: newImage.trim(),
             },
-            description: newDescription,
+            description: newDescription.trim(),
             coordinates: newCoordinates,
-            location: newLocation,
+            location: newLocation.trim(),
             balloonContent: 
                             `
                             <div class="balloon balloon_small">
-                                <h5 class="balloon__heading">${currentRestaurant.title}</h5>
-                                <img class="balloon__image balloon__image_big" src=${newImage} alt=${currentRestaurant.title}/>
+                                <h5 class="balloon__heading">${currentRestaurant.title.trim()}</h5>
+                                <img class="balloon__image balloon__image_big" src=${newImage.trim()} alt=${currentRestaurant.title.trim()}/>
                                 <div>
-                                    <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
+                                    <a class="map-link" href="tel:${newPhone.trim()}">${newPhone.trim()}</a>
                                 </div>
                             </div>
                             `,   
             hintContent: 
                         `
                         <div class="hint">
-                            <h5 class="hint__heading">${currentRestaurant.title}</h5>
-                            <img class="hint__image" src=${newImage} alt=${currentRestaurant.title}/>
+                            <h5 class="hint__heading">${currentRestaurant.title.trim()}</h5>
+                            <img class="hint__image" src=${newImage.trim()} alt=${currentRestaurant.title.trim()}/>
                             <div>
-                                <a class="map-link" href="tel:${newPhone}">${newPhone}</a>
+                                <a class="map-link" href="tel:${newPhone.trim()}">${newPhone.trim()}</a>
                             </div>
                         </div>
                         `,  
@@ -71,7 +71,7 @@ function Edit() {
         })
 
         if (response.status === 200) {
-            if (newDescription.trim() && newLocation.trim() && newPhone.trim()) {
+            if (newDescription && newLocation && newPhone) {
                 dispatch({
                     type: 'EDIT_RESTAURANT',
                     payload: editedRestaurant
@@ -91,8 +91,9 @@ function Edit() {
             setStatusOfResponse(500)    
             setMessageOfResponse('Извините, ошибка на стороне сервера')
         } else if (response.status === 401) {
+            const messageResponse = await response.json()
             notification.open({
-                message: 'Неполные или некорректные данные!',
+                message: messageResponse.error
             })
         }
         
@@ -201,7 +202,6 @@ function Edit() {
                         <Form.Item
                             label="Телефон"
                             name="телефон"
-                            hasFeedback
                             initialValue={newPhone}
                             >
                             <Input 

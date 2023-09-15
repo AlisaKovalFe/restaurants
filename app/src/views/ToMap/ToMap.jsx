@@ -8,9 +8,9 @@ const { Title } = Typography;
 function ToMap() {
     const { state } = useContext(globalContext)
 
-    // let copy = {...state}
+    let copy = {...state}
     let features = []
-    state.list.map((el) => features.push(el.features))
+    copy.list.map((el) => features.push(el.features))
 
     const restaurantsOnMap = {
         "type": "FeatureCollection",

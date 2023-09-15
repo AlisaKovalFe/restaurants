@@ -25,17 +25,9 @@ function App() {
   }
 
   useEffect(() => {
-    async function resp() {
-      const response = await fetch('http://localhost:4000/restaurants')
-      const text = await response.json()
-      console.log(text)
-      getRestaurants(text)
-    }
-    resp()
-
-    // fetch('http://localhost:4000/restaurants')
-    //   .then((res) => res.json())
-    //   .then((res) => getRestaurants(res))
+    fetch('http://localhost:4000/restaurants')
+      .then((res) => res.json())
+      .then((res) => getRestaurants(res))
   }, [])
 
   useEffect(() => {

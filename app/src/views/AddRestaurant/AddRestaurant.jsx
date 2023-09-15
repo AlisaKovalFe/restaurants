@@ -28,16 +28,16 @@ function AddRestaurant() {
 
         const newRestaurant = {
             id: Date.now(),
-            title: title,
+            title: title.trim(),
             cover: {
-                src: image,
-                alt: title,
+                src: image.trim(),
+                alt: title.trim(),
             },
-            description: description,
-            location: location,
+            description: description.trim(),
+            location: location.trim(),
             features: {
                 type: "Feature",
-                id: title,
+                id: title.trim(),
                 geometry: {
                     type: "Point",
                     coordinates: coordinates
@@ -46,19 +46,19 @@ function AddRestaurant() {
                     balloonContent: 
                                 `
                                 <div class="balloon balloon_small">
-                                    <h5 class="balloon__heading">${title}</h5>
-                                    <img class="balloon__image balloon__image_big" src=${image} alt=${title}/>
+                                    <h5 class="balloon__heading">${title.trim()}</h5>
+                                    <img class="balloon__image balloon__image_big" src=${image.trim()} alt=${title.trim()}/>
                                     <div>
-                                        <a class="map-link" href="tel:${phone}">${phone}</a>
+                                        <a class="map-link" href="tel:${phone.trim()}">${phone.trim()}</a>
                                     </div>
                                 </div>
                                 `,             
                     hintContent: `
                                 <div class="hint">
-                                    <h5 class="hint__heading">${title}</h5>
-                                    <img class="hint__image" src=${image} alt=${title}/>
+                                    <h5 class="hint__heading">${title.trim()}</h5>
+                                    <img class="hint__image" src=${image.trim()} alt=${title.trim()}/>
                                     <div>
-                                        <a class="map-link" href="tel:${phone}">${phone}</a>
+                                        <a class="map-link" href="tel:${phone.trim()}">${phone.trim()}</a>
                                     </div>
                                 </div>
                                 `,  
@@ -82,7 +82,7 @@ function AddRestaurant() {
         })
 
         if (response.status === 200) {
-            if (title.trim() && image.trim() && description.trim() && location.trim() && phone.trim()) {
+            if (title && image && description && location && phone) {
                 dispatch({
                     type: 'ADD_RESTAURANT', 
                     payload: newRestaurant
@@ -105,9 +105,7 @@ function AddRestaurant() {
             setMessageOfResponse('Извините, ошибка на стороне сервера')
             // navigate('/error')
         } else if (response.status === 401) {
-            console.log('hi')
             const messageResponse = await response.json()
-        console.log(messageResponse)
             notification.open({
                 message: messageResponse.error
             })
