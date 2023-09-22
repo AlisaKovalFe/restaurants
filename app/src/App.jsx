@@ -1,7 +1,7 @@
 import './styles/App.css';
 import { useReducer, useEffect } from 'react'
 import { globalContext as GlobalContext } from './context/globalContext'
-import { reducer } from './reducers//reducer'
+import { reducer } from './reducers/reducer'
 
 import { initializer } from './hooks/useLS'
 import Header from './views/Header/Header';

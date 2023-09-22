@@ -8,7 +8,6 @@ import { globalContext } from '../../context/globalContext'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Typography } from 'antd';
 import { Card } from 'antd';
-import { optionsOfIcon } from '../../data/restaurants'
 const { Meta } = Card;
 const { Title, Paragraph } = Typography;
 
@@ -139,7 +138,13 @@ function Edit() {
                             <Placemark
                                 modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
                                 geometry={newCoordinates}    
-                                options={optionsOfIcon}                    
+                                options={{
+                                    iconLayout: "default#image",
+                                    iconImageHref: "https://img.icons8.com/?size=512&id=63653&format=png",
+                                    iconImageSize: [40, 40],
+                                    iconImageOffset: [-10, -10],                            
+                                    balloonCloseButton: true,
+                                }}                    
                             />
                             <GeolocationControl 
                                     options={{ float: "left" }}

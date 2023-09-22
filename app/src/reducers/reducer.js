@@ -2,6 +2,7 @@ export function reducer(state, action) {
     switch(action.type) {
         case 'GET_RESTAURANTS': {
             const { restaurants } = action.payload
+            console.log(restaurants)
             return { ...state, list: restaurants}
         }
 

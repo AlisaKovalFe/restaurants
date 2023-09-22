@@ -7,7 +7,6 @@ import HelpToolTip from '../../components/HelpToolTip/HelpToolTip'
 import { globalContext } from '../../context/globalContext';
 import { useNavigate } from 'react-router-dom'
 import { YMaps, Map, GeolocationControl, SearchControl, RouteButton, Placemark } from '@pbe/react-yandex-maps';
-import { optionsOfIcon } from '../../data/restaurants'
 const { Title } = Typography;
 
 function AddRestaurant() {
@@ -140,7 +139,13 @@ function AddRestaurant() {
                                 <Placemark
                                     modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
                                     geometry={coordinates}    
-                                    options={optionsOfIcon}                    
+                                    options={{
+                                        iconLayout: "default#image",
+                                        iconImageHref: "https://img.icons8.com/?size=512&id=63653&format=png",
+                                        iconImageSize: [40, 40],
+                                        iconImageOffset: [-10, -10],                            
+                                        balloonCloseButton: true,
+                                    }}                    
                                 />
                                 <GeolocationControl 
                                         options={{ float: "left" }}
