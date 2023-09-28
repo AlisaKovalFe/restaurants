@@ -6,6 +6,7 @@ import Error from '../../components/Error/Error'
 import { Card } from 'antd';
 import { Link } from 'react-router-dom'
 import { globalContext } from '../../context/globalContext';
+import axios from 'axios'
 const { Title, Paragraph } = Typography;
 const { Meta } = Card;
 
@@ -15,13 +16,8 @@ function Restaurants() {
     const [ messageOfResponse, setMessageOfResponse] = useState('')
 
     async function handeleDelete(id) {
-
-        const response = await fetch(`http://localhost:4000/restaurants/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-        })
+        
+        const response = await axios.delete(`http://localhost:4000/restaurants/${id}`)
         if (response.status === 200) {
             dispatch({
                 type: 'DELETE_RESTAURANT',

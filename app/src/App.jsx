@@ -2,11 +2,11 @@ import './styles/App.css';
 import { useReducer, useEffect } from 'react'
 import { globalContext as GlobalContext } from './context/globalContext'
 import { reducer } from './reducers/reducer'
-
 import { initializer } from './hooks/useLS'
 import Header from './views/Header/Header';
 import Main from './views/Main/Main'
 import Footer from './views/Footer/Footer';
+import axios from 'axios'
 
 function App() {
   const initialState = {
@@ -25,9 +25,9 @@ function App() {
   }
 
   useEffect(() => {
-    fetch('http://localhost:4000/restaurants')
-      .then((res) => res.json())
-      .then((res) => getRestaurants(res))
+    axios.get('http://localhost:4000/restaurants')
+      .then((res) => getRestaurants(res.data))
+      .catch((error) => console.log(error))
   }, [])
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import { globalContext } from '../../context/globalContext'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Typography } from 'antd';
 import { Card } from 'antd';
+import axios from 'axios'
 const { Meta } = Card;
 const { Title, Paragraph } = Typography;
 
@@ -61,13 +62,7 @@ function Edit() {
                         `,  
         }
 
-        const response = await fetch(`http://localhost:4000/restaurants/restaurant-edit/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(editedRestaurant)
-        })
+        const response = await axios.put(`http://localhost:4000/restaurants/restaurant-edit/${id}`, editedRestaurant)
 
         if (response.status === 200) {
             if (newDescription && newLocation && newPhone) {

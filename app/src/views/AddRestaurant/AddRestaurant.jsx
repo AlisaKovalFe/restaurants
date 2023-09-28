@@ -7,6 +7,7 @@ import HelpToolTip from '../../components/HelpToolTip/HelpToolTip'
 import { globalContext } from '../../context/globalContext';
 import { useNavigate } from 'react-router-dom'
 import { YMaps, Map, GeolocationControl, SearchControl, RouteButton, Placemark } from '@pbe/react-yandex-maps';
+import axios from 'axios'
 const { Title } = Typography;
 
 function AddRestaurant() {
@@ -72,14 +73,8 @@ function AddRestaurant() {
             }
         }
 
-        const response = await fetch('http://localhost:4000/restaurants', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(newRestaurant)
-        })
-
+        const response = await axios.post('http://localhost:4000/restaurants', newRestaurant)
+        
         if (response.status === 200) {
             if (title && image && description && location && phone) {
                 dispatch({

@@ -3,6 +3,7 @@ import styles from './home.module.scss'
 import { Typography } from 'antd';
 import Gallery from '../../components/Gallery/Gallery';
 import Error from '../../components/Error/Error'
+import axios from 'axios'
 const { Title, Paragraph } = Typography;
 
 
@@ -12,20 +13,33 @@ function Home() {
     const [ messageOfResponse, setMessageOfResponse] = useState('')
 
     useEffect(() => {
-        fetch('http://localhost:4000/')
-            .then((res) => {
-                if (res.status === 200) {
-                    return res.json()
-                } else if (res.status === 404) {
-                    setStatusOfResponse(404) 
-                    setMessageOfResponse('Извините, данная страница не существует')    
-                } else if (res.status === 500) {
-                    setStatusOfResponse(500)    
-                    setMessageOfResponse('Извините, ошибка на стороне сервера')
-                }
+        axios.get('http://localhost:4000/')
+        .then((res) => {
+            if (res.status === 200) {
+                return setGallery(res.data)
+            } else if (res.status === 404) {
+                setStatusOfResponse(404) 
+                setMessageOfResponse('Извините, данная страница не существует')    
+            } else if (res.status === 500) {
+                setStatusOfResponse(500)    
+                setMessageOfResponse('Извините, ошибка на стороне сервера')
+            }
+            
+        })
+        // fetch('http://localhost:4000/')
+            // .then((res) => {
+            //     if (res.status === 200) {
+            //         return res.json()
+            //     } else if (res.status === 404) {
+            //         setStatusOfResponse(404) 
+            //         setMessageOfResponse('Извините, данная страница не существует')    
+            //     } else if (res.status === 500) {
+            //         setStatusOfResponse(500)    
+            //         setMessageOfResponse('Извините, ошибка на стороне сервера')
+            //     }
                 
-            })
-            .then((res) => setGallery(res))
+            // })
+            // .then((res) => setGallery(res))
     }, [])
 
     return (
