@@ -25,17 +25,17 @@ router.post('/', async function(req, res) {
   if (!regExp.test(restaurant.title) || !regExpForSrc.test(restaurant.cover.src) || !regExp.test(restaurant.description) || !regExp.test(restaurant.location) || !regExpForPhone.test(strPhone)) {
     res.status(401)
     let message = {
-      error: `Данные неполные или некорретные, укажите ${filteredErrors}` //просто в строке не получается отправить
+      error: `Данные неполные или некорретные, укажите ${filteredErrors}` 
     }
-    res.send(message) // тут нет end, приметоде send, end не нужен?
+    res.send(message) 
 }
     
-  const restaurants = await fs.readFile('./db/restaurants.txt', 'utf-8') // здесь читаю асинхронно, но дальше неасинхронно, ничего не падает, не оч понимаю все же асинх
+  const restaurants = await fs.readFile('./db/restaurants.txt', 'utf-8') 
   const restaurantsObjectFortmat = JSON.parse(restaurants)
   restaurantsObjectFortmat.unshift(restaurant)
   const restaurantsStringFotmat = JSON.stringify(restaurantsObjectFortmat)
 
-  fs.writeFile('./db/restaurants.txt', restaurantsStringFotmat) //почему тут не нужен await, разобраться с асинхронностью
+  fs.writeFile('./db/restaurants.txt', restaurantsStringFotmat) 
 
   res.status(200).end()
   // res.status(404).end()
