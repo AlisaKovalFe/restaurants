@@ -27,12 +27,7 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:4000/restaurants')
       .then((res) => getRestaurants(res.data))
-      .catch((error) => console.log(error))
   }, [])
-
-  useEffect(() => {
-    localStorage.setItem('restaurants', JSON.stringify(state));
-  }, [state]);
   
   return (
     <div className="App">

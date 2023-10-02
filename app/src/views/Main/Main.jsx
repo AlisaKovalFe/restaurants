@@ -8,7 +8,7 @@ import ToMap from '../ToMap/ToMap'
 import ToRestaurantMap from '../ToRestaurantMap/ToRestaurantMap'
 import Error from '../../components/Error/Error'
 
-function Main(props) {
+function Main() {
 
     return (
         <div>

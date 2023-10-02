@@ -26,20 +26,6 @@ function Home() {
             }
             
         })
-        // fetch('http://localhost:4000/')
-            // .then((res) => {
-            //     if (res.status === 200) {
-            //         return res.json()
-            //     } else if (res.status === 404) {
-            //         setStatusOfResponse(404) 
-            //         setMessageOfResponse('Извините, данная страница не существует')    
-            //     } else if (res.status === 500) {
-            //         setStatusOfResponse(500)    
-            //         setMessageOfResponse('Извините, ошибка на стороне сервера')
-            //     }
-                
-            // })
-            // .then((res) => setGallery(res))
     }, [])
 
     return (

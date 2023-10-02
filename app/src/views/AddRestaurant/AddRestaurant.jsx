@@ -92,12 +92,10 @@ function AddRestaurant() {
         } else if (response.status === 404) { 
             setStatusOfResponse(404) 
             setMessageOfResponse('Извините, данная страница не существует')        
-            // navigate('/error')
 
         } else if (response.status === 500) {
             setStatusOfResponse(500)    
             setMessageOfResponse('Извините, ошибка на стороне сервера')
-            // navigate('/error')
         } else if (response.status === 401) {
             const messageResponse = await response.json()
             notification.open({
