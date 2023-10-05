@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './edit.module.scss'
 import { Button, Form, Input, notification } from 'antd';
 import { useContext, useState } from 'react';
@@ -12,23 +12,38 @@ import axios from 'axios'
 const { Meta } = Card;
 const { Title, Paragraph } = Typography;
 
-
 function Edit() {
     const { state, dispatch } = useContext(globalContext)
     const { id } = useParams()
     const navigate = useNavigate()
     const [form] = Form.useForm();
 
-    const currentRestaurant = state.list.find((el) => el.id === +id)
-    let initialNewPhone = currentRestaurant.features.properties.balloonContent.replace(/[^0-9]/g,"").substr(-11, 11)
+    const getRestaurants = (restaurants) => {
+        dispatch({
+            type: 'GET_RESTAURANTS',
+            payload: {
+                restaurants
+            }
+        })
+    }
+    
+    useEffect(() => {
+        axios.get('http://localhost:4000/restaurants')
+            .then((res) => getRestaurants(res.data))
+    }, [])
 
-    const [ newImage, setNewImage ] = useState(currentRestaurant.cover.src)
-    const [ newDescription, setNewDescription ] = useState(currentRestaurant.description)
-    const [ newLocation, setNewLocation ] = useState(currentRestaurant.location)
-    const [ newCoordinates, setNewCoordinates ] = useState(currentRestaurant.features.geometry.coordinates)
+    const currentRestaurant = state.list.find((el) => el.id === +id)
+    let initialNewPhone = currentRestaurant?.features.properties.balloonContent.replace(/[^0-9]/g,"").substr(-11, 11)
+
+    const [ newImage, setNewImage ] = useState(currentRestaurant?.cover.src)
+    const [ newDescription, setNewDescription ] = useState(currentRestaurant?.description)
+    const [ newLocation, setNewLocation ] = useState(currentRestaurant?.location)
+    const [ newCoordinates, setNewCoordinates ] = useState(currentRestaurant?.features?.geometry?.coordinates)
     const [ newPhone, setNewPhone ] = useState(initialNewPhone)
     const [ statusOfResponse, setStatusOfResponse] = useState(200)
     const [ messageOfResponse, setMessageOfResponse] = useState('')
+
+    console.log(newDescription)
 
     async function handleSubmit() {
     
@@ -100,17 +115,17 @@ function Edit() {
                     <Title level={2} className={styles.heading}>Отредактируй профиль ресторана</Title>
 
                     <Card 
-                        key={currentRestaurant.id}
+                        key={currentRestaurant?.id}
                         className={styles.restaurant}
-                        cover={<img alt={currentRestaurant.cover.alt} src={currentRestaurant.cover.src} className={styles.restaurant__image}/>}
+                        cover={<img alt={currentRestaurant?.cover?.alt} src={currentRestaurant?.cover?.src} className={styles.restaurant__image}/>}
                     >
                         <Meta
                             className={styles.restaurant__description}
-                            title={currentRestaurant.title}
-                            description={currentRestaurant.description}
-                            location={currentRestaurant.location}
+                            title={currentRestaurant?.title}
+                            description={currentRestaurant?.description}
+                            location={currentRestaurant?.location}
                         />
-                        <Paragraph disabled>{currentRestaurant.location}</Paragraph>
+                        <Paragraph disabled>{currentRestaurant?.location}</Paragraph>
                     </Card>
                 </div>
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styles from './restaurants.module.scss'
 import { Typography, notification } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -14,6 +14,20 @@ function Restaurants() {
     const { state, dispatch } = useContext(globalContext)
     const [ statusOfResponse, setStatusOfResponse] = useState(200)
     const [ messageOfResponse, setMessageOfResponse] = useState('')
+
+    const getRestaurants = (restaurants) => {
+        dispatch({
+            type: 'GET_RESTAURANTS',
+            payload: {
+                restaurants
+            }
+        })
+    }
+    
+    useEffect(() => {
+        axios.get('http://localhost:4000/restaurants')
+            .then((res) => getRestaurants(res.data))
+    }, [])
 
     async function handeleDelete(id) {
         

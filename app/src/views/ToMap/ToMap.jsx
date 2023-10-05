@@ -1,16 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect  } from 'react';
 import styles from './tomap.module.scss'
 import { globalContext } from '../../context/globalContext';
 import { YMaps, Map, ObjectManager, GeolocationControl, SearchControl, RouteButton} from '@pbe/react-yandex-maps';
 import { Typography } from 'antd';
+import axios from 'axios'
 const { Title } = Typography;
 
 function ToMap() {
-    const { state } = useContext(globalContext)
+    const { state, dispatch } = useContext(globalContext)
 
-    let copy = {...state}
+    const getRestaurants = (restaurants) => {
+        dispatch({
+            type: 'GET_RESTAURANTS',
+            payload: {
+                restaurants
+            }
+        })
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost:4000/restaurants')
+            .then((res) => getRestaurants(res.data))
+    }, [])
+
     let features = []
-    copy.list.map((el) => features.push(el.features))
+    state.list.map((el) => features.push(el.features))
 
     const restaurantsOnMap = {
         "type": "FeatureCollection",
