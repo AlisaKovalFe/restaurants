@@ -73,35 +73,37 @@ function AddRestaurant() {
             }
         }
 
-        const response = await axios.post('http://localhost:4000/restaurants', newRestaurant)
-        
-        if (response.status === 200) {
-            if (title && image && description && location && phone) {
-                dispatch({
-                    type: 'ADD_RESTAURANT', 
-                    payload: newRestaurant
-                })
-                notification.open({
-                    message: 'Отлично!',
-                    description: 'Вы успешно добавили ресторан'
-                })   
-                setTimeout(() => {
-                    navigate('/restaurants')
-                }, 3000)
-            }            
-        } else if (response.status === 404) { 
-            setStatusOfResponse(404) 
-            setMessageOfResponse('Извините, данная страница не существует')        
-
-        } else if (response.status === 500) {
-            setStatusOfResponse(500)    
-            setMessageOfResponse('Извините, ошибка на стороне сервера')
-        } else if (response.status === 401) {
-            const messageResponse = await response.json()
-            notification.open({
-                message: messageResponse.error
+        axios.post('http://localhost:4000/restaurants', newRestaurant)
+            .then((response) => {             
+                if (response.status === 200) {
+                    if (title && image && description && location && phone) {
+                        dispatch({
+                            type: 'ADD_RESTAURANT', 
+                            payload: newRestaurant
+                        })
+                        notification.open({
+                            message: 'Отлично!',
+                            description: 'Вы успешно добавили ресторан'
+                        })   
+                        setTimeout(() => {
+                            navigate('/restaurants')
+                        }, 3000)
+                    }            
+                }        
             })
-        }
+            .catch((err) => {
+                if (err.response.status === 404) { 
+                    setStatusOfResponse(404) 
+                    setMessageOfResponse('Извините, данная страница не существует')              
+                } else if (err.response.status === 500) {
+                    setStatusOfResponse(500)    
+                    setMessageOfResponse('Извините, ошибка на стороне сервера')
+                } else if (err.response.status === 401) {
+                    notification.open({
+                        message: err.response.data
+                    })
+                }
+            })
     }
     
     return (
