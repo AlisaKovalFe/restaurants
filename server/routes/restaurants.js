@@ -24,10 +24,8 @@ router.post('/', async function(req, res) {
 
   if (!regExp.test(restaurant.title) || !regExpForSrc.test(restaurant.cover.src) || !regExp.test(restaurant.description) || !regExp.test(restaurant.location) || !regExpForPhone.test(strPhone)) {
     res.status(401)
-    let message = {
-      error: `Данные неполные или некорретные, укажите ${filteredErrors}` 
-    }
-    res.send(message) 
+    let error = `Данные неполные или некорретные, укажите ${filteredErrors}`
+    res.send(error) 
 }
     
   const restaurants = await fs.readFile('./db/restaurants.txt', 'utf-8') 
