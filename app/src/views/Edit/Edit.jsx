@@ -43,8 +43,6 @@ function Edit() {
     const [ statusOfResponse, setStatusOfResponse] = useState(200)
     const [ messageOfResponse, setMessageOfResponse] = useState('')
 
-    console.log(newDescription)
-
     async function handleSubmit() {
     
         const editedRestaurant = {
